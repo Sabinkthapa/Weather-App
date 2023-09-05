@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@300&family=Cormorant+Garamond:wght@700&family=Prompt:wght@300&family=Proza+Libre&family=Zilla+Slab:wght@300&display=swap" rel="stylesheet">
     <title>Weather App</title>
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -10,56 +11,24 @@
     <div id="header">Weather Dashboard</div>
     
     <div class="weatherContainer">
-        <h1>Seach for the city :</h1>
+        <h1>Search for the city :</h1>
         <input type="text" id="inputCity" placeholder="Enter your city">
         <button type="button" id="btn-City">Search</button>
     
     <div class="weatherToday">
         <div class="details">
-            <h2>Kathmandu Date:2023-09-03</h2>
-            <h4>Temperature:24 c</h4>
-            <h4>Humidity:45%</h4>
-            <h4>Wind:23 m/h</h4>
+            <h2>_______:(________)</h2>
+            <p>Temperature:___c</p>
+            <p>Humidity:___%</p>
+            <p>Wind:___m/h</p>
         </div>
     </div>
     <div class="forecastWeather">
-        <h1 id="5days">Weather Forecast(5 days)</h1>
-        <ul class="weather5days">
-            <li class="forecast">
-                <h3>2023-09-03</h3>
-                <h4>Temperature:24 c</h4>
-                <h4>Humidity:45%</h4>
-                <h4>Wind:23 m/h</h4>
-            </li>
-            <li class="forecast">
-                <h3>2023-09-03</h3>
-                <h4>Temperature:24 c</h4>
-                <h4>Humidity:45%</h4>
-                <h4>Wind:23 m/h</h4>
-            </li>
-            <li class="forecast">
-                <h3>2023-09-03</h3>
-                <h4>Temperature:24 c</h4>
-                <h4>Humidity:45%</h4>
-                <h4>Wind:23 m/h</h4>
-            </li>
-            <li class="forecast">
-                <h3>2023-09-03</h3>
-                <h4>Temperature:24 c</h4>
-                <h4>Humidity:45%</h4>
-                <h4>Wind:23 m/h</h4>
-            </li>
-            <li class="forecast">
-                <h3>2023-09-03</h3>
-                <h4>Temperature:24 c</h4>
-                <h4>Humidity:45%</h4>
-                <h4>Wind:23 m/h</h4>
-            </li>
+        <h2 id="5days">Weather Forecast(5 days)</h2>
+        <ul class="weatherFiveDays">
         </ul>
     </div>
 </div>
-
-
 </div>
     <script src="./script.js"></script>
 </body>

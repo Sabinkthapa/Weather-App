@@ -1,6 +1,13 @@
 body {
     margin:0;
     box-sizing: border-box;
+    font-family: 'Cormorant Garamond', serif;
+
+}
+h1 {
+    font-weight: bolder;
+    font-size: 30px;
+
 }
 
 #header {
@@ -20,7 +27,7 @@ body {
 }
 
 .weatherToday {
-    background-color: rgb(24, 161, 188);
+    background-color: rgb(174, 220, 230);
     margin-top: 10px;
    text-align: center;
    border-style: double;
@@ -37,16 +44,16 @@ body {
     padding: 5px;
 }
 
-
-.weather5days {
+.weatherFiveDays {
     display: flex;  
     flex-wrap: wrap;
     gap:170px;
-    /* background-color: antiquewhite; */
+
 }
 
 .forecast {
     background-color: bisque; 
+    list-style-type: none;
 }
 
 
