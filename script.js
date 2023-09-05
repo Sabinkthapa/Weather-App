@@ -9,14 +9,7 @@ const weatherTodayDiv =document.querySelector(".weatherToday .details");
 
 const ApiKey = 'dcf43dd6744f3456f9b93aca898f1db6'; //weather APi key
 
-const cardWeather = (itemWeather) => {
-    return `<li class="forecast">
-            <h3>(${itemWeather.dt_txt.split(" ")[0]})</h3>
-            <h4>Temp:${(itemWeather.main.temp - 273.15)} c</h4>
-            <h4>Humidity:${itemWeather.main.humidity}%</h4>
-            <h4>Wind:${itemWeather.wind.speed} M/S</h4>
-            </li>`;
-}
+
 
 function GeoCoordinate(event) {
     event.preventDefault();
@@ -72,9 +65,13 @@ if (!res.ok) {
         const forecastDays =[];
         const fiveDaysForecast = data.list.filter((forecast) => {
             const forecastDate = new Date(forecast.dt_txt).getDate();
+            console.log (forecastDate);
+            const todayDate = new Date().getDate();
+            console.log (todayDate);
 
             //Get 5 days forecast and check if the forecast date is not already added to the forecastDays array
-            if (forecastDate.length<5 && !forecastDays.includes(forecastDate)) {
+        
+            if (forecastDays.length<5 && !forecastDays.includes(forecastDate)) {
                 //add forecast date to forecastDays DOM
                 forecastDays.push(forecastDate);
                 return true;
@@ -87,19 +84,37 @@ if (!res.ok) {
         const iconUrl = `https://openweathermap.org/img/w/${todayWeather.weather[0].icon}.png`;
         //Accessing weather description 
         const weatherDescription = todayWeather.weather[0].description;
-        
 
+        //Get the date from the API's dt_txt field and formwat it tolocaleDatestring format in the brower
+        const date = new Date(todayWeather.dt_txt).toLocaleDateString();
+
+        //appending one day weather to the DOM
+        //adding todaydate and img tag with the icon url and alt in h2 element of dom
+        weatherTodayDiv.innerHTML = `
+        <h2>${cityName}  ${date} <img src ="${iconUrl}" alt="${weatherDescription}"></h2>
+        <p>Temperature: ${(todayWeather.main.temp - 273.15).toFixed(2)} C</p>
+        <p>Humidity: ${todayWeather.main.humidity}%</p>
+        <p>Wind: ${todayWeather.wind.speed}M/s</p>`;
+
+        weatherCards.innerHTML = "";
+        fiveDaysForecast.forEach((itemWeather) => {
+            weatherCards.insertAdjacentHTML('beforeend', cardWeather(itemWeather));
+        });
+    })
+    .catch((err) => {
+        console.error(err);
+        alert("Error fetching weather forecast data");
     });
-
-}};
-
-
-
-
-        
-
-
-
-
+};
+        //creating a card list for 5 days and appending to DOM
+        const cardWeather = (itemWeather) => {
+            return `<li class="forecast">
+                    <h2>(${cityName} ${itemWeather.dt_txt.split(" ")[0]})</h2>
+                    <p>Temp:${(itemWeather.main.temp - 273.15).toFixed(2)} c</p>
+                    <p>Humidity:${itemWeather.main.humidity}%</p>
+                    <p>Wind:${itemWeather.wind.speed} M/S</p>
+                    </li>`;
+        }
+    };
 btnElement.addEventListener("click", GeoCoordinate);
 
