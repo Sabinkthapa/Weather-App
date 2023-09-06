@@ -3,7 +3,7 @@
 ## The weather apps display the current and next 5 days of weather details when user search based on the city.
 
 
-- Reason for this Project: To help user to understand how we can fetch the data from the API and take the details of the weather for the data to display in the browser.
+- Reason for this Project: To help user to understand how we can fetch the data from the API and take the details from the weather for the data to display in the browser.
 
 - Problem this project solved : User can use this apps to search for any weather based on the city.
 
