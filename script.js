@@ -9,31 +9,7 @@ const weatherTodayDiv =document.querySelector(".weatherToday .details");
 
 const ApiKey = 'dcf43dd6744f3456f9b93aca898f1db6'; //weather APi key
 
-// function displayLastSearchedCities(){
-//     const lastSearchCities = JSON.parse(localStorage.getItem("lastSearchCities"));
-//     const lastSearchedList=document.getElementById("lastSearchList");
-//     console.log(lastSearchedList);
-//     lastSearchedList.innerHTML = "";
 
-//     const citiesToDisplay = lastSearchCities.slice(0,5);
-
-//     for(const city of citiesToDisplay) {
-//         const listItem = document.createElement("li");
-//         listItem.textContent = city;
-//         lastSearchedList.appendChild(listItem);
-//     }
-// }
-
-// function storeLastSearchedCity(cityName) { 
-//     let lastSearchCities = JSON.parse( localStorage.getItem("lastSearchedCities"))|| [];
-//     if (!lastSearchCities.includes(cityName)) {
-//         lastSearchCities.unshift(cityName);
-//         if (lastSearchCities.length > 5){
-//             lastSearchCities.pop();
-//         }
-//         localStorage.setItem("lastSearchedCities", JSON.stringify(lastSearchCities));
-// }
-// }
 
 function GeoCoordinate(event) {
     event.preventDefault();
@@ -47,7 +23,8 @@ if (!cityName ){
     alert("city cannot be a number");
     return;
 }
-// storeLastSearchedCity(cityName);
+
+storeLastSearchedCity(cityName);
 const Geocoding_link = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${ApiKey}`;
 //Get entered city coordinates from the api
 fetch (Geocoding_link)
@@ -87,6 +64,8 @@ if (!res.ok) {
     .then((data) => {
         // console.log (data);
         // console.log (data.list);
+
+
         const forecastDays =[];
         const fiveDaysForecast = data.list.filter((forecast) => {
             const forecastDate = new Date(forecast.dt_txt).getDate();
@@ -100,8 +79,6 @@ if (!res.ok) {
                 return true;
             }
         });
-        //Get weather details like rain, humidity ,temperature, date etc
-        // today weather
         const todayWeather = data.list[0];
         //To display weather icons for today weather
         const iconUrl = `https://openweathermap.org/img/w/${todayWeather.weather[0].icon}.png`;
@@ -140,10 +117,38 @@ if (!res.ok) {
         }
     };
 btnElement.addEventListener("click", GeoCoordinate);
+//creating li element and append cities in the li element 
+function appendCityTolist(city) { 
+const lastSearchedList = document.getElementById("lastSearchList");
+const listItem = document.createElement("li");
+listItem.textContent = city;
+listItem.style.listStyleType = "none";
+lastSearchedList.appendChild(listItem); 
 
-// window.addEventListener("load", () => {
-//     displayLastSearchedCities();
-// });
+}
+//store last searched city in local storage and
+function storeLastSearchedCity(cityName) {
+    let lastSearchCities = JSON.parse(localStorage.getItem("lastSearchedCities")) || [];
+    if(!lastSearchCities.includes(cityName)) {
+        lastSearchCities.unshift(cityName); //this unshift method adds one or more elements to the beginning of the array
+        if (lastSearchCities.length > 5) { //ensure the array never exceed 5 cities
+            lastSearchCities.pop(); //removes last element from the array 
+        }
+localStorage.setItem("lastSearchedCities", JSON.stringify(lastSearchCities));
+    }
+}
+//retrives saved cities from local storage,clear existing content and run the function to append the LI for the saved cites
+function loadSavedCities() {
+    const savedCities =JSON.parse(localStorage.getItem('lastSearchedCities')) || [];
+    const lastSearchedList = document.getElementById('lastSearchList');
+    lastSearchedList.innerHTML = "";
+    savedCities.forEach((city) => {
+        appendCityTolist(city);
+    });
+    }
+
+loadSavedCities();
+
 
 
 

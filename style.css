@@ -50,14 +50,15 @@ h1 {
 #lastSearchedList {
     display: flex;
     flex-direction: horizontal;
-    /* background-color: aqua;
-    border-style: dashed; */
 }
+
+
 #fiveDays {
     text-align: center;
 }
 .weatherFiveDays {
     display: flex;  
+    flex-direction: horizontal;
     flex-wrap: wrap;
     gap:100px;
     align-items: center;

@@ -14,6 +14,7 @@ Some working application shots of this schedule planner:
 ![snapshot-weatherapp1](./images/snapshot_weatherapp.png)
 ![snapshot-weatherapp1](./images/snapshot_weatherapp2.png)
 ![snapshot-weatherapp1](./images/snapshot_weatherapp3.png)
+![snapshot-weatherapp1](./images/snapshot_weatherapp4.png)
 
 ## Deployment Link
 
