@@ -31,9 +31,12 @@ h1 {
     margin-top: 10px;
    text-align: center;
    border-style: double;
-
 }
-
+.searchedCity{
+    margin: 1.4em;
+    background-color: aquamarine;
+    width: 50%;
+}
 .search-Container {
     width: 25%;
 }
@@ -42,6 +45,13 @@ h1 {
     background-color: rgb(134, 161, 180);
     margin-top: 10px;
     padding: 5px;
+}
+
+#lastSearchedList {
+    display: flex;
+    flex-direction: horizontal;
+    /* background-color: aqua;
+    border-style: dashed; */
 }
 #fiveDays {
     text-align: center;

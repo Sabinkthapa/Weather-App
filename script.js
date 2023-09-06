@@ -9,7 +9,31 @@ const weatherTodayDiv =document.querySelector(".weatherToday .details");
 
 const ApiKey = 'dcf43dd6744f3456f9b93aca898f1db6'; //weather APi key
 
+// function displayLastSearchedCities(){
+//     const lastSearchCities = JSON.parse(localStorage.getItem("lastSearchCities"));
+//     const lastSearchedList=document.getElementById("lastSearchList");
+//     console.log(lastSearchedList);
+//     lastSearchedList.innerHTML = "";
 
+//     const citiesToDisplay = lastSearchCities.slice(0,5);
+
+//     for(const city of citiesToDisplay) {
+//         const listItem = document.createElement("li");
+//         listItem.textContent = city;
+//         lastSearchedList.appendChild(listItem);
+//     }
+// }
+
+// function storeLastSearchedCity(cityName) { 
+//     let lastSearchCities = JSON.parse( localStorage.getItem("lastSearchedCities"))|| [];
+//     if (!lastSearchCities.includes(cityName)) {
+//         lastSearchCities.unshift(cityName);
+//         if (lastSearchCities.length > 5){
+//             lastSearchCities.pop();
+//         }
+//         localStorage.setItem("lastSearchedCities", JSON.stringify(lastSearchCities));
+// }
+// }
 
 function GeoCoordinate(event) {
     event.preventDefault();
@@ -23,7 +47,7 @@ if (!cityName ){
     alert("city cannot be a number");
     return;
 }
-
+// storeLastSearchedCity(cityName);
 const Geocoding_link = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${ApiKey}`;
 //Get entered city coordinates from the api
 fetch (Geocoding_link)
@@ -40,6 +64,7 @@ fetch (Geocoding_link)
 .then(data => {
  
     const {name ,lat, lon} = data[0];
+    // console.log(data[0]);
     getweatherdetails (name, lat, lon);
 })
 .catch((err) => {
@@ -61,14 +86,12 @@ if (!res.ok) {
     })
     .then((data) => {
         // console.log (data);
-        console.log (data.list);
+        // console.log (data.list);
         const forecastDays =[];
         const fiveDaysForecast = data.list.filter((forecast) => {
             const forecastDate = new Date(forecast.dt_txt).getDate();
-            console.log (forecastDate);
-            const todayDate = new Date().getDate();
-            console.log (todayDate);
-
+            // console.log (forecastDate);
+          
             //Get 5 days forecast and check if the forecast date is not already added to the forecastDays array
         
             if (forecastDays.length<5 && !forecastDays.includes(forecastDate)) {
@@ -108,13 +131,20 @@ if (!res.ok) {
 };
         //creating a card list for 5 days and appending to DOM
         const cardWeather = (itemWeather) => {
-            return `<li class="forecast">
-                    <h2>(${cityName} ${itemWeather.dt_txt.split(" ")[0]})</h2>
-                    <p>Temp:${(itemWeather.main.temp - 273.15).toFixed(2)} c</p>
-                    <p>Humidity:${itemWeather.main.humidity}%</p>
-                    <p>Wind:${itemWeather.wind.speed} M/S</p>
-                    </li>`;
+        return `<li class="forecast">
+                <h2>(${cityName} ${itemWeather.dt_txt.split(" ")[0]})</h2>
+                <p>Temp:${(itemWeather.main.temp - 273.15).toFixed(2)} c</p>
+                <p>Humidity:${itemWeather.main.humidity}%</p>
+                <p>Wind:${itemWeather.wind.speed} M/S</p>
+                </li>`;
         }
     };
 btnElement.addEventListener("click", GeoCoordinate);
+
+// window.addEventListener("load", () => {
+//     displayLastSearchedCities();
+// });
+
+
+
 
